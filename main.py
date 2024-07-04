@@ -119,14 +119,48 @@ def calculate_score(size, reveals_used, attempts):
     return final_score
 
 
+def load_scores(filename):
+    if os.path.exists(filename):
+        with open(filename, 'r') as f:
+            lines = [x.strip().split(')')[1].split('|')
+                     for x in f.readlines() if x.strip()]
+            scores = []
+            for line in lines:
+                score_info = line[0].strip().split(',')
+                score_dict = {
+                    'score': int(score_info[0].split(':')[1].strip()),
+                    'unique_cards': int(score_info[1].split(':')[1].strip()),
+                    'attempts': int(score_info[2].split(':')[1].strip()),
+                    'reveals_used': int(score_info[3].split(':')[1].strip()),
+                    'timestamp': line[1].strip()
+                }
+                scores.append(score_dict)
+            return scores
+    return []
+
+
+def save_scores(filename, scores):
+    with open(filename, 'w') as f:
+        for i, score in enumerate(scores):
+            f.write(f'({i+1}) Score: {score["score"]}, unique cards: {score["unique_cards"]}, '
+                    f'attempts: {score["attempts"]}, reveals used: {score["reveals_used"]} | {score["timestamp"]}\n')
+
+
 def record_score(attempts, size, reveals_used, score):
-    fname = 'Scores.txt'
+    filename = 'Scores.txt'
     dt_string = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    score = calculate_score(size, reveals_used, attempts)
-    with open(fname, "a") as f:
-        f.write(
-            f'\nScore: {score} (unique cards:{size}, attempts: {attempts}, '
-            f'reveals used: {reveals_used}) | {dt_string}')
+    score_entry = {
+        'score': score,
+        'unique_cards': size,
+        'attempts': attempts,
+        'reveals_used': reveals_used,
+        'timestamp': dt_string
+    }
+
+    scores = load_scores(filename)
+    scores.append(score_entry)
+    scores = sorted(scores, key=lambda x: x['score'], reverse=True)
+    save_scores(filename, scores)
 
 
 def play_memory_game():
