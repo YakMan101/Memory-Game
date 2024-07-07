@@ -20,7 +20,7 @@ Where:
 
 ## Running the Game
 You need to make sure you have python installed on your machine.
-This game will frequently clear the console, so permission to clear may be required when non-native terminal.
+This game will frequently clear the console, so permission to clear may be required if using non-native terminal.
 
 To run the code for the memory game:
 1. Clone a local copy of the project from [Memory-Game](https://github.com/YakMan101/Memory-Game.git) or download the zip file.
