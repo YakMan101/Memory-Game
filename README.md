@@ -23,11 +23,11 @@ You need to make sure you have python installed on your machine.
 This game will frequently clear the console, so permission to clear may be required if using non-native terminal.
 
 To run the code for the memory game:
-1. Clone a local copy of the project from [Memory-Game](https://github.com/YakMan101/Memory-Game.git) or download the zip file.
+1. Clone a local copy of the project from [memory_cards](https://github.com/YakMan101/Memory-Game.git) or download the zip file.
 2. Open the terminal and `cd` into the directory containing `Memory-Game.py`.
 3. Run `Memory-Game.py` using:
    ```bash
-   python3 Memory-Game.py
+   python3 memory_cards.py
 4. Follow the prompts given in the terminal.
 
 Enjoy the game and try to get the highest score!
